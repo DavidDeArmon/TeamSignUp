@@ -6,6 +6,7 @@ class CreateTeam extends Component {
     return (
       <div>
         <Link to = '/'>Back</Link>
+        <Link to = '/authPage'>Login</Link>
       </div>
     );
   }
