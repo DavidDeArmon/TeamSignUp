@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-import { Grid, Typography,TextField } from "@material-ui/core";
+import { Grid, Typography, TextField } from "@material-ui/core";
 
 class PersonalInfo extends Component {
-  constructor(){
-    super()
-    this.state={
-      fName:'',
-      lName:'',
-      address1:'',
-      address2:'',
-      city:'',
-      state:'',
-      zip:'',
-      country:''
-    }
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      address1: "",
+      address2: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: ""
+    };
   }
-  handleChange=()=>
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
   render() {
     return (
       <div>
@@ -25,6 +28,7 @@ class PersonalInfo extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               required
               id="firstName"
               name="firstName"
@@ -35,6 +39,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               required
               id="lastName"
               name="lastName"
@@ -45,6 +50,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              onChange={this.handleChange}
               required
               id="email"
               name="email"
@@ -55,6 +61,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              onChange={this.handleChange}
               required
               id="address1"
               name="address1"
@@ -65,6 +72,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              onChange={this.handleChange}
               id="address2"
               name="address2"
               label="Address line 2"
@@ -74,6 +82,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               required
               id="city"
               name="city"
@@ -84,6 +93,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               id="state"
               name="state"
               label="State/Province/Region"
@@ -92,6 +102,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               required
               id="zip"
               name="zip"
@@ -102,6 +113,7 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              onChange={this.handleChange}
               required
               id="country"
               name="country"

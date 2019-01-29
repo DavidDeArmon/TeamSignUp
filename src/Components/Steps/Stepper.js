@@ -96,7 +96,7 @@ class SetUpStepper extends Component {
         <div className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
-              Team Sign Up
+              Sign Up
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {this.state.steps.map(label => (
