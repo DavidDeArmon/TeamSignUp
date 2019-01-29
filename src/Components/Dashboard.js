@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class Dashboard extends Component {
   constructor() {
@@ -12,13 +13,25 @@ class Dashboard extends Component {
     return (
       <div>
         <div>
-          <Link to='/authPage'>Login</Link>
+          <Link to="/authPage">
+            <Button variant="contained" color="primary">
+              Login
+            </Button>
+          </Link>
         </div>
         <div>
-          <Link to="/newTeam">Create Team</Link>
+          <Link to="/newTeam">
+            <Button variant="contained" color="primary">
+              Create Team
+            </Button>
+          </Link>
         </div>
         <div>
-          <Link to="/joinTeam">Join an Existing Team</Link>
+          <Link to="/joinTeam">
+            <Button variant="contained" color="primary">
+              Join an Existing Team
+            </Button>
+          </Link>
         </div>
       </div>
     );
