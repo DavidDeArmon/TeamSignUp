@@ -58,20 +58,47 @@ class SetUpStepper extends Component {
     this.state = {
       activeStep: 0,
       steps: ["Personal Information", "Team Information", "Payment"],
-    
+      team: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      address1: "",
+      address2: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: ""
     };
   }
   componentDidMount() {
     if (this.props.type === "personal") {
       this.setState({ steps: ["Personal Information", "Payment"] });
     }
+    if (this.props.team){
+      this.setState({team:this.props.team})
+    }
   }
   getStepContent = () => {
     const { activeStep } = this.state;
-    if (activeStep === 0) return <PersonalInfo />;
-    if (activeStep === 1 && this.props.type === "team") return <CreateTeam />;
-    if (activeStep === 1 && this.props.type === "personal") return <Payment />;
-    if (activeStep === 2) return <Payment />;
+    if (activeStep === 0)
+      return (
+        <PersonalInfo
+          personalInfo={this.state.personalInfo}
+          handleChange={this.handleChange}
+          team={this.props.match.params.team}
+        />
+      );
+    if (activeStep === 1 && this.props.type === "team")
+      return (
+        <CreateTeam
+          personalInfo={this.state.personalInfo}
+          handleChange={this.handleChange}
+        />
+      );
+    if (activeStep === 1 && this.props.type === "personal")
+      return <Payment personalInfo={this.state.personalInfo} />;
+    if (activeStep === 2)
+      return <Payment personalInfo={this.state.personalInfo} />;
     else throw new Error("Unknown step");
   };
   handleNext = () => {
@@ -80,7 +107,11 @@ class SetUpStepper extends Component {
   handleBack = () => {
     this.setState({ activeStep: this.state.activeStep - 1 });
   };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
   render() {
+    console.log('this.props',this.props);
     const { classes } = this.props;
     const { activeStep } = this.state;
     return (

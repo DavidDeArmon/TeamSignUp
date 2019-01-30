@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from "./Components/Dashboard";
 import AuthPage from "./Components/Auth/AuthPage";
 import SetUpStepper from "./Components/Steps/Stepper";
+import BrowseTeams from "./Components/BrowseTeams";
 
 class App extends Component {
   render() {
@@ -15,9 +16,10 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Route path="/" exact component={Dashboard} />
-            <Route path="/newTeam" render={(props)=><SetUpStepper type='team'/>} />
-            <Route path="/joinTeam" render={(props)=><SetUpStepper type='personal'/>} />
+            <Route path="/newTeam" render={(props)=><SetUpStepper {...props} type='team'/>} />
+            <Route path="/joinTeam/:team" render={(props)=><SetUpStepper {...props} type='personal'/>} />
             <Route path="/authPage" component={AuthPage} />
+            <Route path="/browseTeams" component={BrowseTeams} />
           </div>
         </BrowserRouter>
       </FirebaseDatabaseProvider>
