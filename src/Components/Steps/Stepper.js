@@ -111,7 +111,6 @@ class SetUpStepper extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    console.log('this.props',this.props);
     const { classes } = this.props;
     const { activeStep } = this.state;
     return (

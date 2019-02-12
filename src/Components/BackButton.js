@@ -10,11 +10,6 @@ return (
         Back
       </Button>
     </Link>
-    <Link to="/authPage">
-      <Button variant="contained" color="primary">
-        Login
-      </Button>
-    </Link>
   </div>
    )
 }

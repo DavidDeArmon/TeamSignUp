@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import {
+  Checkbox,
+  Typography,
+  TextField,
+  withStyles,
+  Grid,
+  FormControlLabel
+} from "@material-ui/core";
 
 const styles = theme => ({
   main: {
@@ -25,10 +30,26 @@ class CreateTeam extends Component {
         <Typography component="h1" variant="h5">
           Create New Team
         </Typography>
-        <div>
-          <TextField label="Group Name" id="filled-name" margin="normal" fullWidth/>
-        </div>
-       
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <TextField
+              label="Group Name"
+              id="filled-name"
+              margin="normal"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox color="secondary" name="saveAddress" value="no" />
+              }
+              label="Private"
+              
+            />
+            <TextField label="Passcode" id="passcode" />
+          </Grid>
+        </Grid>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 {
-  "name": "golf-sign-up",
-  "version": "0.1.0",
+  "name": "hope-for-fertility",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.1",
@@ -9,9 +9,9 @@
     "firebase": "^5.8.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-firebaseui": "^3.1.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.3"
+    "react-scripts": "2.1.3",
+    "square-connect": "^2.20181212.0"
   },
   "scripts": {
     "start": "react-scripts start",

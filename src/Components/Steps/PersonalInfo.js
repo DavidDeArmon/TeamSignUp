@@ -9,14 +9,16 @@ class PersonalInfo extends Component {
           Personal Information
         </Typography>
         <Grid container spacing={24}>
-        <Grid item xs={12}>
-            <TextField
-            value={this.props.team}
-              label="Team"
-              fullWidth
-              autoComplete='false'
-            />
-          </Grid>
+          {this.props.team && (
+            <Grid item xs={12}>
+              <TextField
+                value={this.props.team}
+                label="Team"
+                fullWidth
+                autoComplete="false"
+              />
+            </Grid>
+          )}
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}

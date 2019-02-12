@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
+import db from "../fire";
 import {
   Grid,
   Button,
@@ -12,6 +13,7 @@ import {
   Card,
   CardActions
 } from "@material-ui/core";
+import PassCode from "./PassCodeModal";
 
 const styles = theme => ({
   appBar: {
@@ -55,13 +57,17 @@ class BrowseTeams extends Component {
   constructor() {
     super();
     this.state = {
-      teams: [
-        { name: "Red", members: ["Steve", "Karen"] },
-        { name: "Blue", members: ["David", "Chase", "Joey"] },
-        { name: "Orange", members: ["Chandler", "Rachel", "Jim", "Pam"] },
-        { name: "Green", members: ["Stanley", "Leslie", "Ron", "Chris"] }
-      ]
+      teams: []
     };
+  }
+  componentDidMount() {
+    let newteams = [];
+    db.collection("teams")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => newteams.push(doc.data()));
+        this.setState({ teams: newteams });
+      });
   }
   render() {
     const { classes } = this.props;
@@ -105,10 +111,10 @@ class BrowseTeams extends Component {
                   </Link>
                 </Grid>
                 <Grid item>
-                <Link to="/newTeam">
-                  <Button variant="outlined" color="primary">
-                    Create New Team
-                  </Button>
+                  <Link to="/newTeam">
+                    <Button variant="outlined" color="primary">
+                      Create New Team
+                    </Button>
                   </Link>
                 </Grid>
               </Grid>
@@ -116,10 +122,9 @@ class BrowseTeams extends Component {
           </div>
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
-          {/* End hero unit */}
           <Grid container spacing={40}>
-            {this.state.teams.map((team,idx)=> (
-              <Grid item key={idx} sm={6} md={4} lg={3}>
+            {this.state.teams.map((team, idx) => (
+              <Grid item key={team.name} sm={6} md={4} lg={3}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -130,13 +135,15 @@ class BrowseTeams extends Component {
                     ))}
                   </CardContent>
                   <CardActions>
-                    {team.members.length < 4 && (
-                        <Link to={`/joinTeam/${team.name}`}>
-                      <Button size="small" color="primary">
-                        Join
-                      </Button>
-                        </Link>
+                    {team.private &&  <PassCode passcode={team.passcode} team={team.name}/> }
+                    {!team.private && team.members.length < 4 && (
+                      <Link to={`/joinTeam/${team.name}`}>
+                        <Button variant='outlined' size="small" color="primary">
+                          Join
+                        </Button>
+                      </Link>
                     )}
+                    {team.private && <Typography>Invite Only</Typography>}
                   </CardActions>
                 </Card>
               </Grid>
