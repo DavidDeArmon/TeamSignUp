@@ -2,35 +2,34 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Button, Grid } from "@material-ui/core";
+import logo from "../assets/Hope for Fertility (Long).png"
 const styles = theme =>({
   heroUnit: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    height:'100vh'
   },
   heroContent: {
     maxWidth: 600,
-    height:"100vh",
     margin: "0 auto",
-    padding: `${theme.spacing.unit * 12}px 0 ${theme.spacing.unit * 6}px`
+    padding: `${theme.spacing.unit * 6}px 0 ${theme.spacing.unit * 6}px`,
   },
   heroButtons: {
     marginTop: theme.spacing.unit * 6
   },
+  logo:{
+    width:"50em",
+    maxWidth:"95vw",
+    margin:"auto",
+    marginTop:"10vh"
+  }
 })
 class Dashboard extends Component {
   render() {
     const {classes} = this.props
     return (
       <div className={classes.heroUnit}>
+          <img src={logo} alt='logo' className={classes.logo}/>
           <div className={classes.heroContent}>
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
-              Hope for Fertility
-            </Typography>
             <Typography
               variant="h6"
               align="center"

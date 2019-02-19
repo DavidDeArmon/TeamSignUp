@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from '../assets/Hope for Fertility (white).png'
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
@@ -11,13 +12,15 @@ import {
   Toolbar,
   CardContent,
   Card,
-  CardActions
+  CardActions,
+  GridList
 } from "@material-ui/core";
 import PassCode from "./PassCodeModal";
 
 const styles = theme => ({
   appBar: {
-    position: "relative"
+    position: "relative",
+    
   },
   heroUnit: {
     backgroundColor: theme.palette.background.paper
@@ -45,11 +48,16 @@ const styles = theme => ({
   },
   card: {
     height: "100%",
+    minWidth: "15em",
     display: "flex",
     flexDirection: "column"
   },
   cardContent: {
     flexGrow: 1
+  },
+  logo:{
+    height:"5em",
+    margin:"1em 1em 1em 1em",
   }
 });
 
@@ -71,13 +79,12 @@ class BrowseTeams extends Component {
   }
   render() {
     const { classes } = this.props;
+    console.log("this.state.teams", this.state.teams);
     return (
       <div>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Hope For Fertility
-            </Typography>
+            <img src={logo} alt='hope for fertility' className={classes.logo}/>
           </Toolbar>
         </AppBar>
         <div className={classes.heroUnit}>
@@ -127,23 +134,43 @@ class BrowseTeams extends Component {
               <Grid item key={team.name} sm={6} md={4} lg={3}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h6" component="h1">
                       {team.name}
                     </Typography>
-                    {team.members.map(member => (
-                      <Typography key={member}>{member}</Typography>
-                    ))}
+                    <Typography variant="subtitle1" component="h6">
+                      Members:
+                    </Typography>
+                    <GridList ul='true' cols={1} cellHeight='auto'>
+                      {team.members.map(member => (
+                        <Typography key={member}>{member}</Typography>
+                      ))}
+                    </GridList>
                   </CardContent>
                   <CardActions>
-                    {team.private &&  <PassCode passcode={team.passcode} team={team.name}/> }
+                    {team.private && team.members.length < 4 && (
+                      <PassCode
+                        passcode={team.passcode}
+                        team={team.name}
+                        selectTeam={this.props.selectTeam}
+                      />
+                    )}
                     {!team.private && team.members.length < 4 && (
-                      <Link to={`/joinTeam/${team.name}`}>
-                        <Button variant='outlined' size="small" color="primary">
+                      <Link to={`/joinTeam/`}>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          color="primary"
+                          onClick={() => this.props.selectTeam(team.name)}
+                        >
                           Join
                         </Button>
                       </Link>
                     )}
-                    {team.private && <Typography>Invite Only</Typography>}
+                    {team.private && team.members.length < 4 && (
+                      <Typography gutterBottom component="h2">
+                        Private
+                      </Typography>
+                    )}
                   </CardActions>
                 </Card>
               </Grid>

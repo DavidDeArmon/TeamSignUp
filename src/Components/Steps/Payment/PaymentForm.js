@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
-import './payment.css'
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core";
+import "./payment.css";
 const styles = {
   name: {
-    verticalAlign: 'top',
-    display: 'none',
+    verticalAlign: "top",
+    display: "none",
     margin: 0,
-    border: 'none',
     fontSize: "16px",
     fontFamily: "Helvetica Neue",
     padding: "16px",
@@ -15,39 +14,37 @@ const styles = {
     lineHeight: "1.15em",
     placeholderColor: "#000",
     _webkitFontSmoothing: "antialiased",
-    _mozOsxFontSmoothing: "grayscale",
+    _mozOsxFontSmoothing: "grayscale"
   },
   leftCenter: {
-    float: 'left',
-    textAlign: 'center'
+    float: "left",
+    textAlign: "center"
   },
   blockRight: {
-    display: 'block',
-    float: 'right'
+    display: "block",
+    float: "right"
   },
   center: {
-    textAlign: 'center'
+    textAlign: "center"
   }
-}
+};
 
 class PaymentForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       cardBrand: "",
       nonce: undefined,
       googlePay: false,
       applePay: false,
-      masterpass: false
-    }
-    this.requestCardNonce = this.requestCardNonce.bind(this);
+    };
   }
 
-  requestCardNonce(){
+  requestCardNonce=()=> {
     this.paymentForm.requestCardNonce();
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const config = {
       applicationId: "sq0idp-rARHLPiahkGtp6mMz2OeCA",
       locationId: "GMT96A77XABR1",
@@ -67,13 +64,10 @@ class PaymentForm extends Component {
         }
       ],
       applePay: {
-        elementId: 'sq-apple-pay'
-      },
-      masterpass: {
-        elementId: 'sq-masterpass'
+        elementId: "sq-apple-pay"
       },
       googlePay: {
-        elementId: 'sq-google-pay'
+        elementId: "sq-google-pay"
       },
       cardNumber: {
         elementId: "sq-card-number",
@@ -92,21 +86,16 @@ class PaymentForm extends Component {
         placeholder: "Zip"
       },
       callbacks: {
-        methodsSupported: (methods) => {
-          if(methods.googlePay){
+        methodsSupported: methods => {
+          if (methods.googlePay) {
             this.setState({
               googlePay: methods.googlePay
-            })
+            });
           }
-          if(methods.applePay){
+          if (methods.applePay) {
             this.setState({
               applePay: methods.applePay
-            })
-          }
-          if(methods.masterpass){
-            this.setState({
-              masterpass: methods.masterpass
-            })
+            });
           }
           return;
         },
@@ -140,13 +129,13 @@ class PaymentForm extends Component {
 
             return;
           }
+          this.props.paymentSuccess(nonce)
           this.setState({
             nonce: nonce
-          })
+          });
         },
-        unsupportedBrowserDetected: () => {
-        },
-        inputEventReceived: (inputEvent) => {
+        unsupportedBrowserDetected: () => {},
+        inputEventReceived: inputEvent => {
           switch (inputEvent.eventType) {
             case "focusClassAdded":
               break;
@@ -160,14 +149,14 @@ class PaymentForm extends Component {
               document.getElementById("error").style.display = "none";
               break;
             case "cardBrandChanged":
-              if(inputEvent.cardBrand !== "unknown"){
+              if (inputEvent.cardBrand !== "unknown") {
                 this.setState({
                   cardBrand: inputEvent.cardBrand
-                })
+                });
               } else {
                 this.setState({
                   cardBrand: ""
-                })
+                });
               }
               break;
             case "postalCodeChanged":
@@ -176,16 +165,13 @@ class PaymentForm extends Component {
               break;
           }
         },
-        paymentFormLoaded: function() {
-          document.getElementById('name').style.display = "inline-flex";
-        }
       }
     };
     this.paymentForm = new this.props.paymentForm(config);
     this.paymentForm.build();
   }
 
-  render(){
+  render() {
     return (
       <div className="container">
         <div id="form-container">
@@ -193,9 +179,6 @@ class PaymentForm extends Component {
             <button style={{display: (this.state.applePay) ? 'inherit': 'none'}}
                     className="wallet-button"
                     id="sq-apple-pay"></button>
-            <button style={{display: (this.state.masterpass) ? 'block': 'none'}}
-                    className="wallet-button"
-                    id="sq-masterpass"></button>
             <button style={{display: (this.state.googlePay) ? 'inherit': 'none'}}
                     className="wallet-button"
                     id="sq-google-pay"></button>
@@ -215,12 +198,6 @@ class PaymentForm extends Component {
               <div id="sq-expiration-date"></div>
               <div id="sq-cvv"></div>
             </div>
-            <input
-              id="name"
-              style={styles.name}
-              type="text"
-              placeholder="Name"
-            />
             <div id="sq-postal-code"></div>
           </div>
           <button className="button-credit-card"
@@ -228,7 +205,7 @@ class PaymentForm extends Component {
         </div>
         <p style={styles.center} id="error"></p>
       </div>
-    )
+    );
   }
 }
-export default withStyles(styles)(PaymentForm)
+export default withStyles(styles)(PaymentForm);

@@ -3,15 +3,17 @@ import { Grid, Typography, TextField } from "@material-ui/core";
 
 class PersonalInfo extends Component {
   render() {
+    const {personalInfo} = this.props
     return (
       <div>
         <Typography variant="h6" gutterBottom>
           Personal Information
         </Typography>
         <Grid container spacing={24}>
-          {this.props.team && (
+          {(
             <Grid item xs={12}>
               <TextField
+                placeholder="Go back and reselect your team"
                 value={this.props.team}
                 label="Team"
                 fullWidth
@@ -22,6 +24,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.firstName}
               required
               id="firstName"
               name="firstName"
@@ -33,6 +36,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.lastName}
               required
               id="lastName"
               name="lastName"
@@ -44,6 +48,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.email}
               required
               id="email"
               name="email"
@@ -55,6 +60,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.address1}
               required
               id="address1"
               name="address1"
@@ -66,6 +72,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.address2}
               id="address2"
               name="address2"
               label="Address line 2"
@@ -76,6 +83,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.city}
               required
               id="city"
               name="city"
@@ -87,15 +95,18 @@ class PersonalInfo extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.state}
               id="state"
               name="state"
               label="State/Province/Region"
               fullWidth
+              autoComplete="billing region"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.zip}
               required
               id="zip"
               name="zip"
@@ -107,6 +118,7 @@ class PersonalInfo extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               onChange={this.props.handleChange}
+              value={personalInfo.country}
               required
               id="country"
               name="country"

@@ -59,6 +59,8 @@ class SetUpStepper extends Component {
       activeStep: 0,
       steps: ["Personal Information", "Team Information", "Payment"],
       team: "",
+      private: false,
+      passcode: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -74,8 +76,8 @@ class SetUpStepper extends Component {
     if (this.props.type === "personal") {
       this.setState({ steps: ["Personal Information", "Payment"] });
     }
-    if (this.props.team){
-      this.setState({team:this.props.team})
+    if(this.props.selectedTeam){
+      this.setState({team:this.props.selectedTeam})
     }
   }
   getStepContent = () => {
@@ -83,22 +85,22 @@ class SetUpStepper extends Component {
     if (activeStep === 0)
       return (
         <PersonalInfo
-          personalInfo={this.state.personalInfo}
+          personalInfo={this.state}
           handleChange={this.handleChange}
-          team={this.props.match.params.team}
+          team={this.state.team}
         />
       );
     if (activeStep === 1 && this.props.type === "team")
       return (
         <CreateTeam
-          personalInfo={this.state.personalInfo}
+          personalInfo={this.state}
           handleChange={this.handleChange}
         />
       );
     if (activeStep === 1 && this.props.type === "personal")
-      return <Payment personalInfo={this.state.personalInfo} />;
+      return <Payment personalInfo={this.state} type="personal" />;
     if (activeStep === 2)
-      return <Payment personalInfo={this.state.personalInfo} />;
+      return <Payment personalInfo={this.state} type="team" />;
     else throw new Error("Unknown step");
   };
   handleNext = () => {
@@ -108,7 +110,11 @@ class SetUpStepper extends Component {
     this.setState({ activeStep: this.state.activeStep - 1 });
   };
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    if (event.target.name === "private") {
+      this.setState({ [event.target.name]: event.target.checked });
+    } else {
+      this.setState({ [event.target.name]: event.target.value });
+    }
   };
   render() {
     const { classes } = this.props;
@@ -123,7 +129,7 @@ class SetUpStepper extends Component {
             <BackButton />
           </Toolbar>
         </AppBar>
-        <div className={classes.layout}>
+        <form className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Sign Up
@@ -142,17 +148,22 @@ class SetUpStepper extends Component {
                   Back
                 </Button>
               )}
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleNext}
-                className={classes.button}
-              >
-                {activeStep === this.state.steps.length - 1 ? "Submit" : "Next"}
-              </Button>
+              {activeStep < this.state.steps.length - 1 && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                  className={classes.button}
+                  action='submit'
+                >
+                  {activeStep === this.state.steps.length - 1
+                    ? "Submit"
+                    : "Next"}
+                </Button>
+              )}
             </div>
           </Paper>
-        </div>
+        </form>
       </div>
     );
   }

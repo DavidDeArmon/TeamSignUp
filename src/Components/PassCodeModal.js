@@ -33,6 +33,7 @@ class PassCode extends Component {
   };
   handleJoin = () => {
     if (this.state.input === this.props.passcode) {
+      this.props.selectTeam(this.props.team)
       this.setState({ redirect: true });
     } else {
       this.setState({ error: "the passcode you entered is incorrect" });
@@ -43,7 +44,7 @@ class PassCode extends Component {
     return (
       <div>
         {this.state.redirect && (
-          <Redirect to={"/jointeam/" + this.props.team} />
+          <Redirect to={"/jointeam"} />
         )}
         <Button
           size="small"

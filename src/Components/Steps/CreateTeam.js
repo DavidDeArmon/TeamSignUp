@@ -36,18 +36,31 @@ class CreateTeam extends Component {
               label="Group Name"
               id="filled-name"
               margin="normal"
+              name="team"
+              onChange={this.props.handleChange}
+              value={this.props.personalInfo.team}
               fullWidth
             />
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
               control={
-                <Checkbox color="secondary" name="saveAddress" value="no" />
+                <Checkbox
+                  color="secondary"
+                  name="private"
+                  value="no"
+                  onChange={this.props.handleChange}
+                />
               }
               label="Private"
-              
             />
-            <TextField label="Passcode" id="passcode" />
+            <TextField
+              label="Passcode"
+              id="passcode"
+              name="passcode"
+              onChange={this.props.handleChange}
+              value={this.props.personalInfo.passcode}
+            />
           </Grid>
         </Grid>
       </div>
