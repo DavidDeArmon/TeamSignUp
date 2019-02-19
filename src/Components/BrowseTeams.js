@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from '../assets/Hope for Fertility (white).png'
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
@@ -8,20 +7,16 @@ import {
   Grid,
   Button,
   Typography,
-  AppBar,
-  Toolbar,
   CardContent,
   Card,
   CardActions,
-  GridList
+  GridList,
+  Divider
 } from "@material-ui/core";
 import PassCode from "./PassCodeModal";
+import HeaderBar from "./HeaderBar";
 
 const styles = theme => ({
-  appBar: {
-    position: "relative",
-    
-  },
   heroUnit: {
     backgroundColor: theme.palette.background.paper
   },
@@ -48,24 +43,18 @@ const styles = theme => ({
   },
   card: {
     height: "100%",
-    minWidth: "15em",
+    minWidth: "20em",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
-  cardContent: {
-    flexGrow: 1
-  },
-  logo:{
-    height:"5em",
-    margin:"1em 1em 1em 1em",
-  }
 });
 
 class BrowseTeams extends Component {
   constructor() {
     super();
     this.state = {
-      teams: []
+      teams: [],
+      disableNewTeam:false
     };
   }
   componentDidMount() {
@@ -76,17 +65,15 @@ class BrowseTeams extends Component {
         querySnapshot.forEach(doc => newteams.push(doc.data()));
         this.setState({ teams: newteams });
       });
+      if(this.state.teams.length>=20){
+        this.setState({disableNewTeam:true})
+      }
   }
   render() {
     const { classes } = this.props;
-    console.log("this.state.teams", this.state.teams);
-    return (
+      return (
       <div>
-        <AppBar position="static" className={classes.appBar}>
-          <Toolbar>
-            <img src={logo} alt='hope for fertility' className={classes.logo}/>
-          </Toolbar>
-        </AppBar>
+       <HeaderBar/>
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
             <Typography
@@ -111,18 +98,18 @@ class BrowseTeams extends Component {
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
                 <Grid item>
-                  <Link to="/">
+                  <Link to="/" style={{ textDecoration: 'none' }}>
                     <Button variant="contained" color="primary">
                       Back To Homepage
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/newTeam">
+                  {!this.state.disableNewTeam &&<Link to="/newTeam" style={{ textDecoration: 'none' }}>
                     <Button variant="outlined" color="primary">
                       Create New Team
                     </Button>
-                  </Link>
+                  </Link>}
                 </Grid>
               </Grid>
             </div>
@@ -131,7 +118,7 @@ class BrowseTeams extends Component {
         <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
             {this.state.teams.map((team, idx) => (
-              <Grid item key={team.name} sm={6} md={4} lg={3}>
+              <Grid item key={team.name} sm={6} md={4} lg={4}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h6" component="h1">
@@ -140,6 +127,7 @@ class BrowseTeams extends Component {
                     <Typography variant="subtitle1" component="h6">
                       Members:
                     </Typography>
+                    <Divider variant="middle" />
                     <GridList ul='true' cols={1} cellHeight='auto'>
                       {team.members.map(member => (
                         <Typography key={member}>{member}</Typography>
@@ -155,7 +143,7 @@ class BrowseTeams extends Component {
                       />
                     )}
                     {!team.private && team.members.length < 4 && (
-                      <Link to={`/joinTeam/`}>
+                      <Link to={`/joinTeam/`} style={{ textDecoration: 'none' }}>
                         <Button
                           variant="outlined"
                           size="small"
@@ -167,8 +155,8 @@ class BrowseTeams extends Component {
                       </Link>
                     )}
                     {team.private && team.members.length < 4 && (
-                      <Typography gutterBottom component="h2">
-                        Private
+                      <Typography gutterBottom component="h2"style={{marginLeft:"1em"}}>
+                        Private Group
                       </Typography>
                     )}
                   </CardActions>

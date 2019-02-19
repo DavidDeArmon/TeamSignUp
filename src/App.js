@@ -36,8 +36,7 @@ class App extends Component {
   render() {
     return (
       //to-do
-      //limit number of teams
-      //password protect private teams
+      //fix favicon
       <FirebaseDatabaseProvider firebase={firebase}>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>

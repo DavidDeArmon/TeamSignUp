@@ -43,17 +43,10 @@ class Dashboard extends Component {
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
                 <Grid item>
-                  <Link to="/browseTeams">
+                  <Link to="/browseTeams" style={{ textDecoration: 'none' }}>
                     <Button variant="contained" color="primary">
-                      Browse Teams
+                      Enter Site
                     </Button>
-                  </Link>
-                </Grid>
-                <Grid item>
-                <Link to="/newTeam">
-                  <Button variant="outlined" color="primary">
-                    Create New Team
-                  </Button>
                   </Link>
                 </Grid>
               </Grid>

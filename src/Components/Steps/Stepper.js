@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Stepper,
   Step,
@@ -10,15 +8,12 @@ import {
   Paper,
   Button
 } from "@material-ui/core";
-import BackButton from "../BackButton";
 import CreateTeam from "./CreateTeam";
 import PersonalInfo from "./PersonalInfo";
 import Payment from "./Payment";
+import HeaderBar from "../HeaderBar";
 
 const styles = theme => ({
-  appBar: {
-    position: "relative"
-  },
   layout: {
     width: "auto",
     marginLeft: theme.spacing.unit * 2,
@@ -69,7 +64,7 @@ class SetUpStepper extends Component {
       city: "",
       state: "",
       zip: "",
-      country: ""
+      country: "",
     };
   }
   componentDidMount() {
@@ -104,7 +99,11 @@ class SetUpStepper extends Component {
     else throw new Error("Unknown step");
   };
   handleNext = () => {
-    this.setState({ activeStep: this.state.activeStep + 1 });
+    const {firstName,lastName,email, address1, city, zip, country} = this.state
+    console.log('',)
+    if(firstName&&lastName&&email&&address1&&city&&zip&&country){
+      this.setState({ activeStep: this.state.activeStep + 1 });
+    }
   };
   handleBack = () => {
     this.setState({ activeStep: this.state.activeStep - 1 });
@@ -121,14 +120,7 @@ class SetUpStepper extends Component {
     const { activeStep } = this.state;
     return (
       <div>
-        <AppBar position="absolute" color="default" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Hope For Fertility
-            </Typography>
-            <BackButton />
-          </Toolbar>
-        </AppBar>
+       <HeaderBar/>
         <form className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
@@ -154,7 +146,6 @@ class SetUpStepper extends Component {
                   color="primary"
                   onClick={this.handleNext}
                   className={classes.button}
-                  action='submit'
                 >
                   {activeStep === this.state.steps.length - 1
                     ? "Submit"

@@ -100,7 +100,6 @@ class PersonalInfo extends Component {
               name="state"
               label="State/Province/Region"
               fullWidth
-              autoComplete="billing region"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
