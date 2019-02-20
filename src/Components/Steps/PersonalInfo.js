@@ -3,6 +3,7 @@ import { Grid, Typography, TextField } from "@material-ui/core";
 
 class PersonalInfo extends Component {
   render() {
+    console.log('this.props',this.props)
     const {personalInfo} = this.props
     return (
       <div>
@@ -10,7 +11,7 @@ class PersonalInfo extends Component {
           Personal Information
         </Typography>
         <Grid container spacing={24}>
-          {(
+          {this.props.type==='personal'&&(
             <Grid item xs={12}>
               <TextField
                 placeholder="Go back and reselect your team"

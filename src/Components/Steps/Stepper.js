@@ -83,6 +83,7 @@ class SetUpStepper extends Component {
           personalInfo={this.state}
           handleChange={this.handleChange}
           team={this.state.team}
+          type={this.props.type}
         />
       );
     if (activeStep === 1 && this.props.type === "team")
