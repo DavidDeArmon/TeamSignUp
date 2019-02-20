@@ -91,9 +91,7 @@ class BrowseTeams extends Component {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+             You can create your own team or join an existing team. Some teams are private and require a passcode.<br/> There are currently {this.state.teams.length}/45 available team slots.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
