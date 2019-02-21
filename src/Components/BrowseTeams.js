@@ -11,12 +11,16 @@ import {
   Card,
   CardActions,
   GridList,
-  Divider
+  Divider,
+  Paper
 } from "@material-ui/core";
 import PassCode from "./PassCodeModal";
-import HeaderBar from "./HeaderBar";
 
 const styles = theme => ({
+  background:{
+    minHeight:'100vh',
+    // backgroundColor:"#2DA9E1",
+  },
   heroUnit: {
     backgroundColor: theme.palette.background.paper
   },
@@ -47,6 +51,9 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
   },
+  cardActions:{
+    marginTop:"auto"
+  }
 });
 
 class BrowseTeams extends Component {
@@ -72,9 +79,8 @@ class BrowseTeams extends Component {
   render() {
     const { classes } = this.props;
       return (
-      <div>
-       <HeaderBar/>
-        <div className={classes.heroUnit}>
+      <div className={classes.background}>
+        <Paper className={classes.heroUnit} color="primary">
           <div className={classes.heroContent}>
             <Typography
               component="h1"
@@ -91,7 +97,7 @@ class BrowseTeams extends Component {
               color="textSecondary"
               paragraph
             >
-             You can create your own team or join an existing team. Some teams are private and require a passcode.<br/> There are currently {this.state.teams.length}/45 available team slots.
+             You can create your own team or join an existing team. Some teams are private and require a passcode.<br/> There are currently {this.state.teams.length} teams out of 25 available team slots.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
@@ -112,7 +118,7 @@ class BrowseTeams extends Component {
               </Grid>
             </div>
           </div>
-        </div>
+        </Paper>
         <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
             {this.state.teams.map((team, idx) => (
@@ -132,7 +138,7 @@ class BrowseTeams extends Component {
                       ))}
                     </GridList>
                   </CardContent>
-                  <CardActions>
+                  <CardActions className={classes.cardActions}>
                     {team.private && team.members.length < 4 && (
                       <PassCode
                         passcode={team.passcode}

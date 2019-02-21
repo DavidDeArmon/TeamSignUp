@@ -3,15 +3,21 @@ import { Grid, Typography, TextField } from "@material-ui/core";
 
 class PersonalInfo extends Component {
   render() {
-    console.log('this.props',this.props)
-    const {personalInfo} = this.props
+    const { personalInfo } = this.props;
+    let fnameFilled = !personalInfo.firstName &&this.props.nextClicked;
+    let lnameFilled = !personalInfo.lastName&&this.props.nextClicked;
+    let emailFilled = !personalInfo.email&&this.props.nextClicked;
+    let addressFilled = !personalInfo.address1&&this.props.nextClicked;
+    let cityFilled = !personalInfo.city&&this.props.nextClicked;
+    let zipFilled = !personalInfo.zip&&this.props.nextClicked;
+    let countryFilled = !personalInfo.country&&this.props.nextClicked;
     return (
       <div>
         <Typography variant="h6" gutterBottom>
           Personal Information
         </Typography>
         <Grid container spacing={24}>
-          {this.props.type==='personal'&&(
+          {this.props.type === "personal" && (
             <Grid item xs={12}>
               <TextField
                 placeholder="Go back and reselect your team"
@@ -32,6 +38,7 @@ class PersonalInfo extends Component {
               label="First name"
               fullWidth
               autoComplete="fname"
+              error={fnameFilled}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -44,6 +51,7 @@ class PersonalInfo extends Component {
               label="Last name"
               fullWidth
               autoComplete="lname"
+              error={lnameFilled}
             />
           </Grid>
           <Grid item xs={12}>
@@ -56,6 +64,7 @@ class PersonalInfo extends Component {
               label="Email"
               fullWidth
               autoComplete="email"
+              error={emailFilled}
             />
           </Grid>
           <Grid item xs={12}>
@@ -68,6 +77,7 @@ class PersonalInfo extends Component {
               label="Address line 1"
               fullWidth
               autoComplete="billing address-line1"
+              error={addressFilled}
             />
           </Grid>
           <Grid item xs={12}>
@@ -91,6 +101,7 @@ class PersonalInfo extends Component {
               label="City"
               fullWidth
               autoComplete="billing address-level2"
+              error={cityFilled}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -113,6 +124,7 @@ class PersonalInfo extends Component {
               label="Zip / Postal code"
               fullWidth
               autoComplete="billing postal-code"
+              error={zipFilled}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -125,6 +137,7 @@ class PersonalInfo extends Component {
               label="Country"
               fullWidth
               autoComplete="billing country"
+              error={countryFilled}
             />
           </Grid>
         </Grid>

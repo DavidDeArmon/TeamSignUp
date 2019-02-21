@@ -7,14 +7,14 @@ const styles = theme => ({
   heroUnit: {
     backgroundColor: "#2DA9E1",
     height: "100vh",
-    width:'100vw',
-    position:"absolute"
+    width: "100vw",
+    position: "absolute"
   },
-  paper:{
-    width:"50em",
-    maxWidth:"95vw",
-    margin:"auto",
-    marginTop:'10vh'
+  paper: {
+    width: "50em",
+    maxWidth: "95vw",
+    margin: "auto",
+    marginTop: "10vh"
   },
   heroContent: {
     maxWidth: 600,
@@ -58,7 +58,10 @@ class Dashboard extends Component {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <a href="https://www.hopeforfertility.org/" style={{ textDecoration: "none" }}>
+                  <a
+                    href="https://www.hopeforfertility.org/"
+                    style={{ textDecoration: "none" }}
+                  >
                     <Button variant="outlined" color="primary">
                       Foundation Site
                     </Button>

@@ -11,7 +11,6 @@ import {
 import CreateTeam from "./CreateTeam";
 import PersonalInfo from "./PersonalInfo";
 import Payment from "./Payment";
-import HeaderBar from "../HeaderBar";
 
 const styles = theme => ({
   layout: {
@@ -52,6 +51,7 @@ class SetUpStepper extends Component {
     super(props);
     this.state = {
       activeStep: 0,
+      nextClicked:false,
       steps: ["Personal Information", "Team Information", "Payment"],
       team: "",
       private: false,
@@ -84,6 +84,7 @@ class SetUpStepper extends Component {
           handleChange={this.handleChange}
           team={this.state.team}
           type={this.props.type}
+          nextClicked={this.state.nextClicked}
         />
       );
     if (activeStep === 1 && this.props.type === "team")
@@ -101,9 +102,10 @@ class SetUpStepper extends Component {
   };
   handleNext = () => {
     const {firstName,lastName,email, address1, city, zip, country} = this.state
-    console.log('',)
     if(firstName&&lastName&&email&&address1&&city&&zip&&country){
       this.setState({ activeStep: this.state.activeStep + 1 });
+    }else{
+      this.setState({nextClicked:true})
     }
   };
   handleBack = () => {
@@ -120,9 +122,7 @@ class SetUpStepper extends Component {
     const { classes } = this.props;
     const { activeStep } = this.state;
     return (
-      <div>
-       <HeaderBar/>
-        <form className={classes.layout}>
+      <div className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Sign Up
@@ -155,7 +155,6 @@ class SetUpStepper extends Component {
               )}
             </div>
           </Paper>
-        </form>
       </div>
     );
   }
