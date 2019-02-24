@@ -89,7 +89,7 @@ class BrowseTeams extends Component {
               color="textPrimary"
               gutterBottom
             >
-              Teams
+              Putting for Parenthood
             </Typography>
             <Typography
               variant="h6"
