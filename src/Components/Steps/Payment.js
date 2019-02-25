@@ -95,7 +95,7 @@ class Payment extends Component {
   };
   handleClose = () => {
     this.setState({ successModal: false });
-    this.props.history.push("/browseTeams");
+    this.props.history.push("/");
   };
   render() {
     return (

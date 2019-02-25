@@ -4,7 +4,6 @@ import firebase from "./fire";
 import { BrowserRouter, Route } from "react-router-dom";
 import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Dashboard from "./Components/Dashboard";
 import SetUpStepper from "./Components/Steps/Stepper";
 import BrowseTeams from "./Components/BrowseTeams";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
@@ -42,7 +41,6 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <div className="App">
-            <Route path="/" exact component={Dashboard} />
             <Route
               path="/newTeam"
               render={props => <SetUpStepper {...props} type="team" />}
@@ -51,7 +49,7 @@ class App extends Component {
               path="/joinTeam"
               render={props => <SetUpStepper {...props} type="personal" selectedTeam={this.state.selectedTeam}/>}
               />
-            <Route path="/browseTeams" render ={props=><BrowseTeams {...props} selectTeam={this.selectTeam} />}/>
+            <Route exact path="/" render ={props=><BrowseTeams {...props} selectTeam={this.selectTeam} />}/>
           </div>
         </BrowserRouter>
         </MuiThemeProvider>

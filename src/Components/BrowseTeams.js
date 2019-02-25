@@ -15,11 +15,18 @@ import {
   Paper
 } from "@material-ui/core";
 import PassCode from "./PassCodeModal";
+import mainImage from "../assets/Putting for Parenthood home page.png"
 
 const styles = theme => ({
   background:{
     minHeight:'100vh',
     // backgroundColor:"#2DA9E1",
+  },
+  mainImage:{
+    width:"40vw",
+    minWidth:"20em",
+    margin:'auto',
+    marginTop:"5vh"
   },
   heroUnit: {
     backgroundColor: theme.palette.background.paper
@@ -81,15 +88,16 @@ class BrowseTeams extends Component {
       return (
       <div className={classes.background}>
         <Paper className={classes.heroUnit} color="primary">
+          <img className={classes.mainImage} src={mainImage} alt="Putting For Parenthood"/>
           <div className={classes.heroContent}>
             <Typography
               component="h1"
-              variant="h2"
+              variant="h4"
               align="center"
               color="textPrimary"
               gutterBottom
             >
-              Putting for Parenthood
+              Team Selection
             </Typography>
             <Typography
               variant="h6"
